@@ -1,0 +1,70 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum QuestionType {
+  OPEN_ANSWER
+  SURVEY
+}
+
+model Question {
+  id               String       @id @default(auto()) @map("_id") @db.ObjectId
+  type             QuestionType @default(OPEN_ANSWER)
+  surveyOptions    String[]
+  text             String
+  createdAt        DateTime     @default(now())
+  availabilityDate DateTime
+  answers          Answer[]
+}
+
+// type QuestionInput {
+//   type             QuestionType? @default(OPEN_ANSWER)
+//   surveyOptions    String[] @default([])
+//   text             String @default("")
+//   availabilityDate DateTime
+// }
+
+model Answer {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  text       String
+  createdAt  DateTime @default(now())
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId String   @db.ObjectId
+  author     User     @relation(fields: [authorId], references: [id])
+  authorId   String   @db.ObjectId
+  anonymous  Boolean  @default(false)
+  upvotes    Int      @default(0)
+  views      Int      @default(0)
+  award      Award?
+}
+
+// type AnswerInput {
+//   text      String
+//   questionId String
+//   anonymous Boolean? @default(false)
+//   authorId String
+// }
+
+model User {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  username String   @unique
+  avatar   String?
+  answers  Answer[]
+}
+
+// type UserInput {
+//   username String
+//   avatar String?
+// }
+
+type Award {
+  name        String
+  description String
+  logo        String
+  createdAt   DateTime @default(now())
+}

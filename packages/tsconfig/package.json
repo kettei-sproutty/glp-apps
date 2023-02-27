@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
+  "files": [
+    "base.json",
+    "node18.json"
+  ],
   "publishConfig": {
     "access": "public"
   },
