@@ -6,8 +6,10 @@
 *.jpg binary
 *.gif binary
 
-# Ensure that markdown files are treated as text
+# Ensure that markdown, Rust and TOML files are treated as text
 *.md text
+*.rs text
+*.toml text
 
 # Ignore build artifacts and some directories
 /dist/ export-ignore
