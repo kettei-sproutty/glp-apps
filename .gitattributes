@@ -1,0 +1,20 @@
+# Auto detect text files and perform LF normalization
+* text=auto eol=lf
+
+# Don't attempt to merge binary files
+*.png binary
+*.jpg binary
+*.gif binary
+
+# Ensure that markdown files are treated as text
+*.md text
+
+# Ignore build artifacts and some directories
+/dist/ export-ignore
+/node_modules/ export-ignore
+
+# ESLint should always treat JavaScript and TypeScript files as text
+*.js linguist-language=JavaScript text
+*.jsx linguist-language=JavaScript text
+*.ts linguist-language=TypeScript text
+*.tsx linguist-language=TypeScript text
