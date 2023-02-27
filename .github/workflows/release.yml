@@ -1,0 +1,26 @@
+name: release
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Validate commit message
+        run: npx commitlint --from HEAD~1
+      - name: Generate release
+        uses: google-github-actions/release-please-action@v2.5.0
+        with:
+          release-type: 'node'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
