@@ -19,7 +19,7 @@
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
-    "commit-msg": "npx --no -- commitlint --edit --verbose ${1}"
+    "commit-msg": "npx --no -- commitlint --verbose --edit ${1}"
   },
   "lint-staged": {
     "*.{cjs,js,mjs,ts,tsx,css,md,json}": [
