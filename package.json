@@ -18,15 +18,20 @@
     "prepare": "simple-git-hooks"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "npx lint-staged",
+    "commit-msg": "npx --no -- commitlint --edit --verbose ${1}"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,css,md,json}": [
-      "prettier --write",
+    "*.{cjs,js,mjs,ts,tsx,css,md,json}": [
+      "prettier --write"
+    ],
+    "*.{cjs,js,mjs,ts,tsx,mdx}": [
       "eslint --fix"
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
     "eslint": "^8.35.0",
     "eslint-config-glp": "workspace:*",
     "lint-staged": "^13.1.2",
