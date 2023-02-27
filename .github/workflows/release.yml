@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Validate commit message
-        run: npx --no -- commitlint --edit ${{ github.event_path }} --verbose --from HEAD~1
+        run: git log -1 --pretty=%B | npx commitlint --from=stdin --verbose
       - name: Generate release
         uses: google-github-actions/release-please-action@v2.5.0
         with:
