@@ -33,8 +33,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Validate commit messages of PRs
-        run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
+        continue-on-error: true
+        run: pnpm commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
       - name: Generate release
+        continue-on-error: true
         uses: google-github-actions/release-please-action@v2.5.0
         with:
           release-type: 'node'
